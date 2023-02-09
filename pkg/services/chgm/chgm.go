@@ -447,11 +447,9 @@ func (c Client) GetRunningNodesCount(infraID string) (*RunningNodesCount, error)
 }
 
 // GetExpectedNodesCount returns the mininum number of nodes that are supposed to be in the cluster
-// We do not use nodes.GetTotal() here, because total seems to be always 0.
 func (c Client) GetExpectedNodesCount() (*ExpectedNodesCount, error) {
 	nodes, ok := c.cluster.GetNodes()
 	if !ok {
-		// We do not error out here, because we do not want to fail the whole run, because of one missing metric
 		fmt.Printf("node data is missing, dumping cluster object: %#v", c.cluster)
 		return nil, fmt.Errorf("Failed to retrieve cluster node data")
 	}
